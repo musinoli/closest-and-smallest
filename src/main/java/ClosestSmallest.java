@@ -9,27 +9,7 @@ class ClosestSmallest {
 
     static int[][] closest(String numbers) {
         if (numbers.length() == 0) throw new UnsupportedOperationException();
-        List<NumberWeight> numberWeights = new LinkedList<>();
-        StringBuilder numBuilder = new StringBuilder();
-        int weight = 0;
-        int numIndex = 0;
-        for (int i = 0; i < numbers.length(); i++) {
-            char current = numbers.charAt(i);
-            if (current != ' ') {
-                numBuilder.append(current);
-                weight += Character.getNumericValue(current);
-            }
-            if (current == ' ' || i == numbers.length() - 1) {
-                numberWeights.add(new NumberWeight(
-                        Integer.valueOf(numBuilder.toString()), weight, numIndex++));
-                weight = 0;
-                numBuilder.setLength(0);
-            }
-        }
-        return closest(numberWeights);
-    }
-
-    private static int[][] closest(List<NumberWeight> numberWeights) {
+        List<NumberWeight> numberWeights = getNumberWeights(numbers);
         Collections.sort(numberWeights);
         int smallestWeightDiff = Integer.MAX_VALUE;
         NumberWeight smallestFirst = numberWeights.get(0);
@@ -48,6 +28,27 @@ class ClosestSmallest {
             prev = current;
         }
         return output(smallestFirst, smallestSecond);
+    }
+
+    private static List<NumberWeight> getNumberWeights(String numbers) {
+        List<NumberWeight> numberWeights = new LinkedList<>();
+        StringBuilder numBuilder = new StringBuilder();
+        int weight = 0;
+        int numIndex = 0;
+        for (int i = 0; i < numbers.length(); i++) {
+            char current = numbers.charAt(i);
+            if (current != ' ') {
+                numBuilder.append(current);
+                weight += Character.getNumericValue(current);
+            }
+            if (current == ' ' || i == numbers.length() - 1) {
+                numberWeights.add(new NumberWeight(
+                        Integer.valueOf(numBuilder.toString()), weight, numIndex++));
+                weight = 0;
+                numBuilder.setLength(0);
+            }
+        }
+        return numberWeights;
     }
 
     private static int[][] output(NumberWeight first, NumberWeight second) {
