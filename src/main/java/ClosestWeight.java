@@ -5,10 +5,10 @@ import java.util.List;
 /**
  * https://www.codewars.com/kata/5868b2de442e3fb2bb000119
  */
-class ClosestSmallest {
+class ClosestWeight {
 
     static int[][] closest(String numbers) {
-        if (numbers.length() == 0) throw new UnsupportedOperationException();
+        if (numbers.length() == 0) return new int[][]{};
         List<NumberWeight> numberWeights = getNumberWeights(numbers);
         Collections.sort(numberWeights);
         int smallestWeightDiff = Integer.MAX_VALUE;
