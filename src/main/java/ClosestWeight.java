@@ -8,7 +8,7 @@ import java.util.List;
 class ClosestWeight {
 
     static int[][] closest(String numbers) {
-        if (numbers.length() == 0) return new int[][]{};
+        if (numbers == null || numbers.isEmpty()) return new int[][]{};
         List<NumberWeight> numberWeights = getNumberWeights(numbers);
         Collections.sort(numberWeights);
         int smallestWeightDiff = Integer.MAX_VALUE;
