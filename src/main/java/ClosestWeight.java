@@ -27,7 +27,7 @@ class ClosestWeight {
             currentIndex++;
             prev = current;
         }
-        return output(smallestFirst, smallestSecond);
+        return new int[][]{smallestFirst.output(), smallestSecond.output()};
     }
 
     private static List<NumberWeight> getNumberWeights(String numbers) {
@@ -51,10 +51,6 @@ class ClosestWeight {
         return numberWeights;
     }
 
-    private static int[][] output(NumberWeight first, NumberWeight second) {
-        return new int[][]{{first.weight, first.index, first.number}, {second.weight, second.index, second.number}};
-    }
-
     private static class NumberWeight implements Comparable<NumberWeight> {
         int number, weight, index;
 
@@ -62,6 +58,10 @@ class ClosestWeight {
             this.number = number;
             this.weight = weight;
             this.index = index;
+        }
+
+        int[] output() {
+            return new int[]{weight, index, number};
         }
 
         @Override
